@@ -7,13 +7,8 @@ import lombok.Setter;
 import lombok.Value;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 
-// BEGIN
-
-// END
 @AllArgsConstructor
 @Setter
 @Getter
@@ -35,5 +30,4 @@ class Car {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(json, Car.class);
     }
-    // END
 }
