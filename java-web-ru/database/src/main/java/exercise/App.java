@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import exercise.controller.ProductsController;
@@ -30,11 +32,11 @@ public final class App {
         var dataSource = new HikariDataSource(hikariConfig);
         var url = App.class.getClassLoader().getResourceAsStream("schema.sql");
         var sql = new BufferedReader(new InputStreamReader(url))
-            .lines().collect(Collectors.joining("\n"));
+                .lines().collect(Collectors.joining("\n"));
 
         log.info(sql);
         try (var connection = dataSource.getConnection();
-                var statement = connection.createStatement()) {
+             var statement = connection.createStatement()) {
             statement.execute(sql);
         }
         BaseRepository.dataSource = dataSource;
