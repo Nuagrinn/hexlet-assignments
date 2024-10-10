@@ -45,11 +45,12 @@ public class ProductsController {
 
     @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Product update(@RequestBody Product product, @PathVariable Long id) {
-        var oldProduct = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product with id "+ id + " not found"));
-        oldProduct = product;
-        productRepository.saveAndFlush(oldProduct);
-        return oldProduct;
+    public Product update(@RequestBody Product productData, @PathVariable Long id) {
+        var product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product with id "+ id + " not found"));
+        product.setTitle(productData.getTitle());
+        product.setPrice(productData.getPrice());
+        productRepository.saveAndFlush(product);
+        return product;
     }
     // END
 
