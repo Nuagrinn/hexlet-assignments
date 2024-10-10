@@ -43,7 +43,7 @@ public class ProductsController {
         return productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product with id "+ id + " not found"));
     }
 
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Product update(@RequestBody Product productData, @PathVariable Long id) {
         var product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product with id "+ id + " not found"));
