@@ -10,6 +10,16 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-// BEGIN
-
+@Getter
+@Setter
+@Entity
+@Table(name = "products")
+@EqualsAndHashCode(of = {"price", "title"})
+public class Product {
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    private Long id;
+    private int price;
+    private String title;
+}
 // END

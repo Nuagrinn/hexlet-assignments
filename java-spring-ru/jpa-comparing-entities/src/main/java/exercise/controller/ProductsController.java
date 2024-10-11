@@ -1,6 +1,8 @@
 package exercise.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,8 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 
@@ -32,7 +32,18 @@ public class ProductsController {
     }
 
     // BEGIN
-    
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Product create(@RequestBody Product productData) {
+         List<Product> products = productRepository.findAll();
+         var product = products.stream().filter(p -> p.equals(productData)).findFirst();
+         if (product.isPresent()) {
+             throw new ResourceAlreadyExistsException("Product with id " + productData.getId() + " is already exists");
+         } else {
+             productRepository.saveAndFlush(productData);
+         }
+         return productData;
+    }
     // END
 
     @GetMapping(path = "/{id}")
