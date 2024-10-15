@@ -44,7 +44,6 @@ public class TasksController {
     public Task update(@RequestBody Task taskData, @PathVariable long id) {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Task with id " + id + " not found"));
-        task.setUpdatedAt(LocalDate.now());
         task.setDescription(taskData.getDescription());
         task.setTitle(taskData.getTitle());
         taskRepository.saveAndFlush(task);
