@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import exercise.model.Task;
@@ -39,9 +40,29 @@ public class TasksController {
         return task;
     }
 
-    // BEGIN
-    
-    // END
+    @PutMapping(path = "/{id}")
+    public Task update(@RequestBody Task taskData, @PathVariable long id) {
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Task with id " + id + " not found"));
+        task.setUpdatedAt(LocalDate.now());
+        task.setDescription(taskData.getDescription());
+        task.setTitle(taskData.getTitle());
+        taskRepository.saveAndFlush(task);
+        return task;
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Task create(@RequestBody Task taskData) {
+        List<Task> products = taskRepository.findAll();
+        var product = products.stream().filter(p -> p.equals(taskData)).findFirst();
+        if (product.isPresent()) {
+            throw new ResourceNotFoundException("Task with id " + taskData.getId() + " not found");
+        } else {
+            taskRepository.saveAndFlush(taskData);
+        }
+        return taskData;
+    }
 
     @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable long id) {
