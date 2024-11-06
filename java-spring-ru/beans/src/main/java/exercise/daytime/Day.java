@@ -9,6 +9,10 @@ public class Day implements Daytime {
     }
 
     // BEGIN
-    
+    @PostConstruct
+    public void init() {
+        String message = "Day bean is initialized!";
+        System.out.println(message);
+    }
     // END
 }
