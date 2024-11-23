@@ -39,8 +39,7 @@ public class Guest {
     @Email
     private String email;
 
-    @Pattern(regexp = "^\\+.*")
-    @Size(min=11, max=13)
+    @Pattern(regexp = "\\+[0-9]{11,13}")
     private String phoneNumber;
 
     @Pattern(regexp = "\\d{4}", message = "Поле должно содержать ровно 4 цифры")
