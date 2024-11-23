@@ -21,7 +21,6 @@ import exercise.exception.ResourceNotFoundException;
 
 @RestController
 @RequestMapping("/guests")
-@Validated
 public class GuestsController {
 
     @Autowired
@@ -48,12 +47,13 @@ public class GuestsController {
     }
 
     // BEGIN
-    @PostMapping
-    @ResponseStatus(HttpStatus.OK)
-    public GuestDTO create(@RequestBody @Valid GuestCreateDTO guestCreateDTO) {
-        var guest = guestMapper.map(guestCreateDTO);
-        guestRepository.saveAndFlush(guest);
-        return guestMapper.map(guest);
+    @PostMapping(path = "")
+    @ResponseStatus(HttpStatus.CREATED)
+    public GuestDTO create(@Valid @RequestBody GuestCreateDTO guestData) {
+        var guest = guestMapper.map(guestData);
+        guestRepository.save(guest);
+        var guestDto = guestMapper.map(guest);
+        return guestDto;
     }
     // END
 }
