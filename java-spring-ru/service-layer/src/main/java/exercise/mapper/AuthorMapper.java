@@ -17,13 +17,12 @@ import org.mapstruct.MappingTarget;
         unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
 public abstract class AuthorMapper {
-
     // BEGIN
     public abstract Author map(AuthorDTO authorDTO);
 
-    public abstract AuthorDTO map(AuthorCreateDTO authorCreateDTO);
+    public abstract AuthorDTO map(Author model);
 
+    public abstract Author map(AuthorCreateDTO authorCreateDTO);
     // END
-
     public abstract void update(AuthorUpdateDTO dto, @MappingTarget Author model);
 }

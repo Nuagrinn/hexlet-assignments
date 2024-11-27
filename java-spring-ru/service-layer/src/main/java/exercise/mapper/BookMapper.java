@@ -20,7 +20,15 @@ import org.mapstruct.ReportingPolicy;
 public abstract class BookMapper {
 
     // BEGIN
-    
+    public abstract Book map(BookDTO dto);
+
+    public abstract BookDTO map(BookCreateDTO dto);
+
+    @Mapping(source = "author.firstName", target = "authorFirstName")
+    @Mapping(source = "author.lastName", target = "authorFirstName")
+    @Mapping(source = "author.id", target = "authorId")
+
+    public abstract BookDTO map(Book model);
     // END
 
     @Mapping(target = "author", source = "authorId")
