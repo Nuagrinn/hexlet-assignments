@@ -51,8 +51,5 @@ public class AuthorService {
     public void delete(Long id) {
         authorRepository.deleteById(id);
     }
-
-
-
     // END
 }

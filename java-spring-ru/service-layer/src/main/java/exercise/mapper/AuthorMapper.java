@@ -18,7 +18,6 @@ import org.mapstruct.MappingTarget;
 )
 public abstract class AuthorMapper {
     // BEGIN
-    public abstract Author map(AuthorDTO authorDTO);
 
     public abstract AuthorDTO map(Author model);
 
