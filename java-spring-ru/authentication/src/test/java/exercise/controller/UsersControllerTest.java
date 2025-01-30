@@ -30,6 +30,7 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 import com.fasterxml.jackson.databind.ObjectMapper;
 import exercise.repository.UserRepository;
 
+//контроллер
 @SpringBootTest
 @AutoConfigureMockMvc
 class UsersControllerTest {
