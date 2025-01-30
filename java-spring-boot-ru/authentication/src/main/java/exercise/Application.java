@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import net.datafaker.Faker;
 import java.util.Locale;
 
+// start
 @EnableJpaAuditing
 @SpringBootApplication
 public class Application {
